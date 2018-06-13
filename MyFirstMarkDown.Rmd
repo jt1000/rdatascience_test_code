@@ -1,0 +1,14 @@
+---
+title: "MyFirstMarkDown"
+author: "Jateen Bhatt"
+date: "6/5/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(mdsr)
+library(tidyverse)
+```
+
+My Github repository for my assignments can be found at this URL: [https://github.com/jt1000/rdatascience_test_code.git](your URL)

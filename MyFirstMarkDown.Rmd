@@ -12,3 +12,25 @@ library(tidyverse)
 ```
 
 My Github repository for my assignments can be found at this URL: [https://github.com/jt1000/rdatascience_test_code.git](your URL)
+
+
+```{r load_packages, warning=FALSE, message=FALSE}
+data("WorldCities")
+```
+
+```{r glimpse}
+glimpse(WorldCities)
+WorldCities <- head(WorldCities, 200) # 200 rows
+country_col <- WorldCities$country
+unique(country_col)
+```
+Question1
+There are 10 variables and 23,018 Observations
+
+
+Question2
+```{r}
+region_col <-WorldCities$region
+unique(region_col)
+```
+

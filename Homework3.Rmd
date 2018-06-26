@@ -1,0 +1,111 @@
+---
+title: "COMPSCIX 415.2 Homework 3"
+author: "Jateen Bhatt"
+date: "6/26/2018"
+output: html_document
+---
+
+Section 3.8.1 Excercises
+```{r}
+library(tidyverse)
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_point()
+```
+
+Question 1: Overplotting, this makes it hard to see the overlapping data/ mass of data. 
+
+Question 2: width and height are used to control the amount of vertical and horizontal jitter. 
+
+Question 3. Both can bbe used to overcome ovrerplotting, but with geom_count you can get a more precise number on each plot point (if there is overplotting at that point)
+
+Question 4. --> default position adjustment is for the median of the data to be in the center of the chart. 
+```{r}
+library(tidyverse)
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_boxplot()
+```
+
+
+Section 3.9.1 Excercises
+
+Question 2: Actually in the coord_polar documentation there was no right-up on what the labs() refers to. I infured from looking at the example in the homework that it basically tells the geom_bar to reference specific x and y values
+
+Question 4: (a) This chart shows an increasing hwy mileage as per city mileage on most vehicles. 
+(b) coord_fixed() defines and sets the aspect ratio of the 2 variables (x and y), in this case the aspect is maintained between the 2 coordinate points
+(c) geom_abline() shows, in this example, a diagonal line which basically represent the center of the chart. Useful for annotating the plots
+
+```{r}
+library(tidyverse)
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_point() + 
+  geom_abline() +
+  coord_fixed()
+```
+
+Section 4.4
+
+Question 1 --> actually this worked for me.. I'm assuming that the version of r that I'm using was able to intepret the missing fields and work through it..
+
+Question 2. --> 
+```{r}
+library(tidyverse)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+ggplot(data = diamonds)
+  geom_point(mapping = aes(x = carot, y = price))
+
+filter (mpg, cyl == 8)
+filter(diamonds, carat > 3)
+```
+
+
+Section 5.2.4
+Question 1
+1. filter ---> arrival delays of 2 or more hours
+```{r}
+library(nycflights13)
+filter(flights, arr_delay >=120)
+```
+2. filter --> flew to houstan (IAH or HOU)
+```{r}
+library(nycflights13)
+filter(flights, dest == 'HOU')
+```
+3. filter --> were operated by United, American or Delta
+```{r}
+library(nycflights13)
+filter(flights, carrier == 'UA')
+filter(flights, carrier == 'AA')
+filter(flights, carrier == 'DL')
+```
+4. filter --> flights departed in summer months 
+```{r}
+library(nycflights13)
+filter(flights, month %in% c(7, 8, 9))
+```
+5. filter --> arrived 2 hours late but didn't leave late
+```{r}
+library(nycflights13)
+filter(flights, dep_delay == 0 | arr_delay >= 120)
+```
+6. filter --> departed more than an hour late but made up for 30 minutes in the air
+--> I think I got this wrong and need to read more about how to write the string better
+```{r}
+library(nycflights13)
+filter(flights, dep_delay >= 60 | arr_delay <= 30)
+```
+7. filter --> flights that left between midnight and 6am. I just did a less than 0600 filter. 
+```{r}
+library(nycflights13)
+filter(flights, sched_dep_time <= 0600)
+```
+
+Question 2: Between dplyr is useful in selecting a range of values in a table.
+
+Section 5.4.1
+
+Question 1. I'm going to say that if you square 5 to the 5th power, that gives you the number of ways you can sort all 5 fields using the select command. 
+
+Question 3. One_of() seems to help in detecting outliers or vectors that are unique 

@@ -1,0 +1,103 @@
+---
+title: "COMPSCIX 415.2 Homework 6"
+author: "Jateen Bhatt"
+date: "7/16/2018"
+output: html_document
+---
+
+Excercise 1 \newline
+
+Question 1. Age, Smoking and Mortality \newline
+
+Question 2. 1,314 observations on women for the following variables. \newline 
+
+a. survival status after 20 years, a factor with levels Alive Dead \newline
+
+b. smoker status No Yes \newline
+
+c. age in years \newline
+
+Question 3. 
+```{r}
+library(mosaicData)
+library(tidyverse)
+Whickham %>% count( smoker , outcome )
+```
+Here we see 4 outcomes \newline
+a) Not smoking and alive b) Not smoking and Dead c) Smoking and Alive d) Smoking and Dead \newline
+This doesn't make sense since I'd expect a higher proportion of smokers to be dead. \newline
+
+Question 4.
+```{r}
+library(mosaicData)
+library(tidyverse)
+Whickham %>% count( smoker , outcome, age <= 44, ordered=TRUE)
+```
+```{r}
+library(mosaicData)
+library(tidyverse)
+Whickham %>% count( smoker , outcome, age > 44 | age <= 64)
+```
+```{r}
+library(mosaicData)
+library(tidyverse)
+Whickham %>% count( smoker , outcome, age >= 65)
+```
+
+
+Excercise 2.
+Question 1 and 2
+```{r}
+library(tidyverse)
+n <- 10000
+
+# look at ?rgamma to read about this function
+gamma_samp <- tibble(x = rgamma(n, shape = 1, scale = 2)) 
+#gamma_samp
+ggplot(gamma_samp) + geom_histogram(aes(x = gamma_samp), binwidth = 0.5, fill = "grey", color = "black")
+mean_samp <- gamma_samp %>% .[['x']] %>% mean()
+mean_samp
+```
+Question 3
+```{r}
+library(tidyverse)
+n <- 30
+
+# look at ?rgamma to read about this function
+gamma_samp <- tibble(x = rgamma(n, shape = 1, scale = 2)) 
+#gamma_samp
+ggplot(gamma_samp) + geom_histogram(aes(x = gamma_samp), binwidth = 0.5, fill = "grey", color = "black")
+mean_samp <- gamma_samp %>% .[['x']] %>% mean()
+mean_samp
+```
+
+Question 4, Question 5 and Question 6: I was having problems calculating the standard deviation
+```{r}
+# create a vector with 10000 NAs
+mean_samp <- rep(NA, 10000)
+
+# start a loop
+for(i in 1:10000) {
+  g_samp <- rgamma(30, shape = 1, scale = 2)
+  mean_samp[i] <- mean(g_samp)
+}
+# Convert vector to a tibble
+mean_samp <- tibble(mean_samp)
+ggplot(mean_samp) + geom_histogram(aes(x = mean_samp), binwidth = 0.5, fill = "grey", color = "black")
+mean_sample <- mean_samp %>% .[['NA']] %>% mean()
+```
+
+Question 8
+```{r}
+# create a vector with 10000 NAs
+mean_samp <- rep(NA, 300)
+
+# start a loop
+for(i in 1:300) {
+  g_samp <- rgamma(30, shape = 1, scale = 2)
+  mean_samp[i] <- mean(g_samp)
+}
+# Convert vector to a tibble
+mean_samp <- tibble(mean_samp)
+ggplot(mean_samp) + geom_histogram(aes(x = mean_samp), binwidth = 0.5, fill = "grey", color = "black")
+```
